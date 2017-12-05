@@ -3,10 +3,10 @@ package main
 import (
 	"os"
 
+	"github.com/wzshiming/pot/cli"
 	"github.com/wzshiming/pot/cmd/pot/generate"
 	"github.com/wzshiming/pot/cmd/pot/logo"
 	"github.com/wzshiming/pot/cmd/pot/run"
-	cli "gopkg.in/urfave/cli.v2"
 )
 
 func main() {
@@ -91,18 +91,52 @@ func SubcommandsGenerate() []*cli.Command {
 			Usage:   "Generate doc",
 			Flags: []cli.Flag{
 				&cli.StringFlag{
-					Name:  "routers",
-					Usage: "Routers gate",
-					Value: "./routers",
+					Name:    "controllers",
+					Aliases: []string{"c"},
+					Usage:   "Controllers dir",
+					Value:   "./controllers",
 				},
 				&cli.StringFlag{
-					Name:  "swagger",
-					Value: "./swagger",
-					Usage: "Swagger config",
+					Name:    "routers",
+					Aliases: []string{"r"},
+					Usage:   "Routers dir",
+					Value:   "./routers",
+				},
+				&cli.StringFlag{
+					Name:    "swagger",
+					Aliases: []string{"s"},
+					Usage:   "Swagger config",
+					Value:   "./swagger",
 				},
 			},
 			Action: func(c *cli.Context) error {
-				generate.GenerateDocs(c.String("routers"), c.String("swagger"))
+				generate.GenerateDocs(c.String("routers"), c.String("controllers"), c.String("swagger"))
+				return nil
+			},
+		},
+		{
+			Name:    "router",
+			Aliases: []string{"rou", "r"},
+			Usage:   "Generate router",
+			Flags: []cli.Flag{
+				&cli.StringFlag{
+					Name:    "controllers",
+					Aliases: []string{"c"},
+					Usage:   "Controllers dir",
+				},
+				&cli.StringFlag{
+					Name:    "routers",
+					Aliases: []string{"r"},
+					Usage:   "Routers dir",
+				},
+				&cli.StringFlag{
+					Name:    "out",
+					Aliases: []string{"o"},
+					Usage:   "Routers file generate",
+				},
+			},
+			Action: func(c *cli.Context) error {
+				generate.GenerateRouter(c.String("routers"), c.String("controllers"), c.String("out"))
 				return nil
 			},
 		},

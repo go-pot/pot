@@ -40,6 +40,8 @@ var (
 	CanDefaultString   = origin.CanDefaultString
 	CanFilterDuplicate = origin.CanFilterDuplicate
 	CanRowSpan         = origin.CanRowSpan
+	Printf             = origin.Printf
+	Println            = origin.Println
 	Space              = origin.Space
 	StlyeP             = origin.StlyeP
 	StlyePjson         = origin.StlyePjson

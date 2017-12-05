@@ -18,7 +18,6 @@ var (
 	appname      = ""
 	cmd          *exec.Cmd
 	state        sync.Mutex
-	eventTime    = make(map[string]int64)
 	scheduleTime time.Time
 	watchExts    = []string{".go"}
 )
@@ -42,31 +41,23 @@ func NewWatcher(paths []string, cb func()) error {
 		for {
 			select {
 			case e := <-watcher.Events:
-				isBuild := true
 
 				if !shouldWatchFileWithExtension(e.Name) {
 					continue
 				}
 
-				mt := GetFileModTime(e.Name)
-				if t := eventTime[e.Name]; mt == t {
-					pot.Println("Skipping: ", e.String())
-					isBuild = false
-				}
-
-				eventTime[e.Name] = mt
-
-				if !isBuild {
-					continue
-				}
 				pot.Println("Event fired: ", e)
-				go func() {
-					// Wait 1s before autobuild until there is no file change.
-					time.Sleep(time.Second)
-					if cb != nil {
-						cb()
+				if cb != nil {
+					cb()
+				}
+			loop:
+				for {
+					select {
+					case <-watcher.Events:
+					default:
+						break loop
 					}
-				}()
+				}
 			case err := <-watcher.Errors:
 				pot.Println("Watcher error: %s", err.Error()) // No need to exit here
 			}

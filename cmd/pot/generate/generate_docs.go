@@ -7,9 +7,13 @@ import (
 	"github.com/wzshiming/pot"
 )
 
-func GenerateDocs(routers, swagge string) {
+func GenerateDocs(routers, controllers, swagge string) error {
 	s := &swagger.Swagger{}
-	swaggergen.GB(s, routers)
-	utils.WriteFile(s, swagge)
+	swaggergen.GB(s, routers, controllers)
+	err := utils.WriteFile(s, swagge)
+	if err != nil {
+		return err
+	}
 	pot.Println("Generate docs")
+	return nil
 }
