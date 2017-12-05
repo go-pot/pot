@@ -1,7 +1,6 @@
 package pot
 
 import (
-	"github.com/goincremental/negroni-sessions"
 	"github.com/unrolled/render"
 	"github.com/urfave/negroni"
 )
@@ -12,16 +11,17 @@ type Pot struct {
 }
 
 func NewPot(h ...negroni.Handler) *Pot {
+
+	neg := negroni.New(
+		negroni.NewRecovery(),
+		negroni.NewLogger())
+
+	if len(h) != 0 {
+		neg = neg.With(h...)
+	}
 	p := &Pot{
-		Negroni: *negroni.New(
-			negroni.NewRecovery(),
-			negroni.NewLogger()).With(h...),
-		render: render.New(),
+		Negroni: *neg,
+		render:  render.New(),
 	}
 	return p
-}
-
-// 启用 session
-func (p *Pot) EnabledSession(name string, store sessions.Store) {
-	p.With(sessions.Sessions(name, store))
 }
