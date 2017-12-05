@@ -31,7 +31,7 @@ func (c *Request) Host() string {
 }
 
 func (c *Request) RealIP() string {
-	ip := strings.Split(c.Request.Header.Get("X-Real-IP"), ":")[0]
+	ip := strings.Split(c.Header.Get("X-Real-IP"), ":")[0]
 	if ip == "" {
 		ip = c.IP()
 	}
@@ -52,7 +52,7 @@ func (c *Request) IP() string {
 		rip := strings.Split(ips[0], ":")
 		return rip[0]
 	}
-	ip := strings.Split(c.Request.RemoteAddr, ":")
+	ip := strings.Split(c.RemoteAddr, ":")
 	if len(ip) > 0 {
 		if ip[0] != "[" {
 			return ip[0]
