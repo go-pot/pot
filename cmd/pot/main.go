@@ -130,13 +130,18 @@ func SubcommandsGenerate() []*cli.Command {
 					Usage:   "Routers dir",
 				},
 				&cli.StringFlag{
+					Name:    "package",
+					Aliases: []string{"p"},
+					Usage:   "Controllers dir",
+				},
+				&cli.StringFlag{
 					Name:    "out",
 					Aliases: []string{"o"},
 					Usage:   "Routers file generate",
 				},
 			},
 			Action: func(c *cli.Context) error {
-				generate.GenerateRouter(c.String("routers"), c.String("controllers"), c.String("out"))
+				generate.GenerateRouter(c.String("package"), c.String("routers"), c.String("controllers"), c.String("out"))
 				return nil
 			},
 		},

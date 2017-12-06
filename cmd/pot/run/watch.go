@@ -1,7 +1,6 @@
 package run
 
 import (
-	"bytes"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -102,12 +101,12 @@ func NewWatcher(paths []string, cb func()) error {
 func GoGenerate() {
 	cmdName := "go"
 	args := []string{"generate", "./..."}
-	bcmd := exec.Command(cmdName, args...)
-	var stderr bytes.Buffer
-	bcmd.Stderr = &stderr
-	err := bcmd.Run()
+	cmd := exec.Command(cmdName, args...)
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	err := cmd.Run()
 	if err != nil {
-		pot.Println("Failed to generate the application: %s", stderr.String())
+		pot.Println("Failed to generate the application: %s", err)
 		return
 	}
 
@@ -130,12 +129,12 @@ func GoBuild(cb func()) {
 	args := []string{"build"}
 	args = append(args, "-o", appName)
 
-	bcmd := exec.Command(cmdName, args...)
-	var stderr bytes.Buffer
-	bcmd.Stderr = &stderr
-	err := bcmd.Run()
+	cmd := exec.Command(cmdName, args...)
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	err := cmd.Run()
 	if err != nil {
-		pot.Println("Failed to build the application: %s", stderr.String())
+		pot.Println("Failed to build the application: %s", err)
 		return
 	}
 
