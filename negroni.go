@@ -21,9 +21,9 @@ type (
 
 var (
 	// function
-	New      = origin.New
-	Wrap     = origin.Wrap
-	WrapFunc = origin.WrapFunc
+	NewNegroni = origin.New
+	Wrap       = origin.Wrap
+	WrapFunc   = origin.WrapFunc
 )
 
 var (

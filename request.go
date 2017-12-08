@@ -9,15 +9,13 @@ import (
 	"strings"
 )
 
-func NewRequest(pot *Pot, r *http.Request) *Request {
+func NewRequest(r *http.Request) *Request {
 	return &Request{
-		pot:     pot,
 		Request: *r,
 	}
 }
 
 type Request struct {
-	pot *Pot
 	http.Request
 	body []byte
 }
