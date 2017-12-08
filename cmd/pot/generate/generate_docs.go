@@ -4,7 +4,7 @@ import (
 	"github.com/wzshiming/go-swagger/swagger"
 	"github.com/wzshiming/go-swagger/swaggergen"
 	"github.com/wzshiming/go-swagger/utils"
-	"github.com/wzshiming/pot"
+	"gopkg.in/pot.v1"
 )
 
 func GenerateDocs(routers, controllers, swagge string) error {

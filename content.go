@@ -3,7 +3,7 @@ package pot
 import (
 	"net/http"
 
-	"github.com/wzshiming/pot/sessions"
+	"gopkg.in/pot.v1/sessions"
 )
 
 type Content struct {

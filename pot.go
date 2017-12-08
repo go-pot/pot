@@ -1,4 +1,4 @@
-package pot
+package pot // import "gopkg.in/pot.v1"
 
 type Pot struct {
 	Negroni // 基础

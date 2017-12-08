@@ -10,7 +10,7 @@ import (
 	"time"
 
 	"github.com/fsnotify/fsnotify"
-	"github.com/wzshiming/pot"
+	"gopkg.in/pot.v1"
 )
 
 var (

@@ -10,7 +10,7 @@ import (
 
 	"github.com/wzshiming/go-swagger/swagger"
 	"github.com/wzshiming/go-swagger/swaggergen"
-	"github.com/wzshiming/pot"
+	"gopkg.in/pot.v1"
 )
 
 func GenerateRouter(pkg, routers, controllers, out string) error {
@@ -60,8 +60,8 @@ import (
 	controllers "{{.Swagger.Extensions.Package}}"
 	"net/http"
 
-	"github.com/wzshiming/pot"
-	"github.com/wzshiming/pot/router"
+	"gopkg.in/pot.v1"
+	"gopkg.in/pot.v1/router"
 )
 
 func {{.Function}}(p *pot.Pot) *router.Router {

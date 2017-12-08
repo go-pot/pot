@@ -3,10 +3,10 @@ package main
 import (
 	"os"
 
-	"github.com/wzshiming/pot/cli"
-	"github.com/wzshiming/pot/cmd/pot/generate"
-	"github.com/wzshiming/pot/cmd/pot/logo"
-	"github.com/wzshiming/pot/cmd/pot/run"
+	"gopkg.in/pot.v1/cli"
+	"gopkg.in/pot.v1/cmd/pot/generate"
+	"gopkg.in/pot.v1/cmd/pot/logo"
+	"gopkg.in/pot.v1/cmd/pot/run"
 )
 
 func main() {
