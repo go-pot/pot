@@ -7,21 +7,32 @@ import (
 )
 
 type Content struct {
-	r        *http.Request
-	w        http.ResponseWriter
-	sess     sessions.Session
-	Request  *Request
-	Response *Response
+	r    *http.Request
+	w    http.ResponseWriter
+	sess sessions.Session
+	req  *Request
+	resp *Response
 }
 
 func NewContent(w http.ResponseWriter, r *http.Request) *Content {
 	return &Content{
-		Response: NewResponse(w),
-		Request:  NewRequest(r),
-		sess:     sessions.GetSession(r),
-		r:        r,
-		w:        w,
+		r: r,
+		w: w,
 	}
+}
+
+func (s *Content) Request() *Request {
+	if s.req == nil {
+		s.req = NewRequest(s.r)
+	}
+	return s.req
+}
+
+func (s *Content) Response() *Response {
+	if s.resp == nil {
+		s.resp = NewResponse(s.w)
+	}
+	return s.resp
 }
 
 func (s *Content) Session() sessions.Session {
