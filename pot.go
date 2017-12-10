@@ -1,11 +1,15 @@
 package pot // import "gopkg.in/pot.v1"
 
+import (
+	"gopkg.in/pot.v1/negroni"
+)
+
 type Pot struct {
-	Negroni // 基础
+	negroni.Negroni // 基础
 }
 
-func NewPot(h ...Handler) *Pot {
-	neg := NewNegroni(h...)
+func NewPot(h ...negroni.Handler) *Pot {
+	neg := negroni.New(h...)
 
 	p := &Pot{
 		Negroni: *neg,

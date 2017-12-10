@@ -9,7 +9,7 @@ import (
 type Content struct {
 	r        *http.Request
 	w        http.ResponseWriter
-	Session  sessions.Session
+	sess     sessions.Session
 	Request  *Request
 	Response *Response
 }
@@ -18,10 +18,17 @@ func NewContent(w http.ResponseWriter, r *http.Request) *Content {
 	return &Content{
 		Response: NewResponse(w),
 		Request:  NewRequest(r),
-		Session:  sessions.GetSession(r),
+		sess:     sessions.GetSession(r),
 		r:        r,
 		w:        w,
 	}
+}
+
+func (s *Content) Session() sessions.Session {
+	if s.sess == nil {
+		s.sess = sessions.GetSession(s.r)
+	}
+	return s.sess
 }
 
 type PotHandler struct {

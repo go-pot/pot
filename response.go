@@ -2,18 +2,20 @@ package pot
 
 import (
 	"net/http"
+
+	"gopkg.in/pot.v1/render"
 )
 
 func NewResponse(w http.ResponseWriter) *Response {
 	return &Response{
 		ResponseWriter: w,
-		render:         NewRender(),
+		render:         render.New(),
 	}
 }
 
 type Response struct {
 	http.ResponseWriter
-	render *Render
+	render *render.Render
 }
 
 // ResponseJSON 返回JSON
