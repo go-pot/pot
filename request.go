@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"encoding/xml"
 	"io/ioutil"
+	"mime/multipart"
 	"net/http"
 	"net/url"
 	"strings"
@@ -57,6 +58,16 @@ func (c *Request) IP() string {
 		}
 	}
 	return "127.0.0.1"
+}
+
+// BodyFile
+func (c *Request) BodyFile(key string) (multipart.File, *multipart.FileHeader, error) {
+	return c.Request.FormFile(key)
+}
+
+// QueryFormValue 获取query内容 url编码
+func (c *Request) QueryFormValue(key string) string {
+	return c.Request.FormValue(key)
 }
 
 // RequestQueryForm 获取query内容 url编码
