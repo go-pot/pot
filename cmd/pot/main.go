@@ -17,7 +17,7 @@ func main() {
 
 	app.Usage = "Pot is web framework for the Go programming language."
 
-	app.Version = "0.1"
+	app.Version = version
 
 	app.Authors = []*cli.Author{
 		{
@@ -37,7 +37,7 @@ func main() {
 
 	app.Before = func(c *cli.Context) error {
 		if !c.Bool("hidden-logo") {
-			logo.PrintLogo("V0.1")
+			logo.PrintLogo("V" + version)
 		}
 		return nil
 	}
