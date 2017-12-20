@@ -10,7 +10,7 @@ import (
 func init() {
 	sessions.RegisterSession("cookie", func(ur *url.URL) (negroni.HandlerFunc, error) {
 		query := ur.Query()
-		pairs := []byte(query.Get("pairs"))
+		pairs := []byte(query.Get("keyPairs"))
 		name := query.Get("name")
 		if name == "" {
 			name = "session"

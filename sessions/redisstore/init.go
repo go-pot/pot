@@ -11,7 +11,7 @@ import (
 func init() {
 	sessions.RegisterSession("redis", func(ur *url.URL) (negroni.HandlerFunc, error) {
 		query := ur.Query()
-		pairs := []byte(query.Get("pairs"))
+		pairs := []byte(query.Get("keyPairs"))
 		if len(pairs) == 0 {
 			pairs = []byte("pairs")
 		}
@@ -23,13 +23,21 @@ func init() {
 		if network == "" {
 			network = "tcp"
 		}
+		db := query.Get("db")
+		if db == "" {
+			db = "0"
+		}
 		password := query.Get("password")
 		address := ur.Host
 		name := query.Get("name")
 		if name == "" {
 			name = "session"
 		}
-		rs, err := New(int(size), network, address, password, pairs)
+		prefix := query.Get("keyPrefix")
+		if prefix == "" {
+			prefix = "session:"
+		}
+		rs, err := New(int(size), network, address, password, db, prefix, pairs)
 		if err != nil {
 			return nil, err
 		}
