@@ -4,12 +4,11 @@ import (
 	"net/url"
 	"strconv"
 
-	"gopkg.in/pot.v1/negroni"
 	"gopkg.in/pot.v1/sessions"
 )
 
 func init() {
-	sessions.RegisterSession("redis", func(ur *url.URL) (negroni.HandlerFunc, error) {
+	sessions.RegisterSession("redis", func(ur *url.URL) (sessions.Store, error) {
 		query := ur.Query()
 		pairs := []byte(query.Get("keyPairs"))
 		if len(pairs) == 0 {
@@ -29,10 +28,6 @@ func init() {
 		}
 		password := query.Get("password")
 		address := ur.Host
-		name := query.Get("name")
-		if name == "" {
-			name = "session"
-		}
 		prefix := query.Get("keyPrefix")
 		if prefix == "" {
 			prefix = "session:"
@@ -41,6 +36,6 @@ func init() {
 		if err != nil {
 			return nil, err
 		}
-		return sessions.Sessions(name, rs), nil
+		return rs, nil
 	})
 }
