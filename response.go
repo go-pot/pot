@@ -6,16 +6,23 @@ import (
 	"gopkg.in/pot.v1/render"
 )
 
-func NewResponse(w http.ResponseWriter) *Response {
+func NewResponse(w http.ResponseWriter, r *http.Request) *Response {
 	return &Response{
 		ResponseWriter: w,
+		r:              r,
 		render:         render.New(),
 	}
 }
 
 type Response struct {
 	http.ResponseWriter
+	r      *http.Request
 	render *render.Render
+}
+
+// Redirect
+func (c *Response) Redirect(url string, code int) {
+	http.Redirect(c, c.r, url, code)
 }
 
 // ResponseJSON 返回JSON

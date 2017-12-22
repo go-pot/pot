@@ -10,14 +10,16 @@ import (
 	"strings"
 )
 
-func NewRequest(r *http.Request) *Request {
+func NewRequest(w http.ResponseWriter, r *http.Request) *Request {
 	return &Request{
 		Request: *r,
+		w:       w,
 	}
 }
 
 type Request struct {
 	http.Request
+	w    http.ResponseWriter
 	body []byte
 }
 

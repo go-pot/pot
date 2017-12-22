@@ -23,14 +23,14 @@ func NewContent(w http.ResponseWriter, r *http.Request) *Content {
 
 func (s *Content) Request() *Request {
 	if s.req == nil {
-		s.req = NewRequest(s.r)
+		s.req = NewRequest(s.w, s.r)
 	}
 	return s.req
 }
 
 func (s *Content) Response() *Response {
 	if s.resp == nil {
-		s.resp = NewResponse(s.w)
+		s.resp = NewResponse(s.w, s.r)
 	}
 	return s.resp
 }
