@@ -6,11 +6,13 @@ import (
 	"gopkg.in/pot.v1/render"
 )
 
+var rend = render.New()
+
 func NewResponse(w http.ResponseWriter, r *http.Request) *Response {
 	return &Response{
 		ResponseWriter: w,
 		r:              r,
-		render:         render.New(),
+		render:         rend,
 	}
 }
 
