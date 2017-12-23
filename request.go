@@ -83,21 +83,21 @@ func (c *Request) BodyForm() url.Values {
 }
 
 // RequestBody 获取body内容
-func (c *Request) Body() (data []byte, err error) {
+func (c *Request) Body() ([]byte, error) {
 	if c.body != nil {
 		return c.body, nil
 	}
-	defer func() {
-		if data == nil {
-			data = []byte{}
-		}
-		c.body = data
-	}()
 
 	r := c.Request.Body
 
-	defer r.Close()
-	return ioutil.ReadAll(r)
+	data, err := ioutil.ReadAll(r)
+	if err != nil {
+		return nil, err
+	}
+	r.Close()
+
+	c.body = data
+	return c.body, nil
 }
 
 // RequestBodyJSON 获取body内容 JSON编码
