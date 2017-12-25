@@ -32,7 +32,7 @@ func init() {
 		if prefix == "" {
 			prefix = "session:"
 		}
-		rs, err := New(int(size), network, address, password, db, prefix, pairs)
+		rs, err := NewWithDB(int(size), network, address, password, db, prefix, pairs)
 		if err != nil {
 			return nil, err
 		}

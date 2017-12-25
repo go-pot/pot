@@ -14,4 +14,8 @@ var (
 	/*New returns a new Redis store
 	 */
 	New = origin.New
+
+	/*New returns a new Redis store
+	 */
+	NewWithDB = origin.NewWithDB
 )
