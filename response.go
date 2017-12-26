@@ -40,7 +40,7 @@ type Response struct {
 }
 
 // Redirect
-func (c *Response) Redirect(url string, status int) {
+func (c *Response) Redirect(status int, url string) {
 	http.Redirect(c, c.r, url, status)
 }
 
