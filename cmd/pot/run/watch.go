@@ -27,7 +27,7 @@ func init() {
 }
 
 // NewWatcher starts an fsnotify Watcher on the specified paths
-func NewWatcher(paths []string, cb func()) error {
+func NewWatcher(paths []string, exts []string, cb func()) error {
 	watcher, err := fsnotify.NewWatcher()
 	if err != nil {
 		return nil
@@ -35,13 +35,17 @@ func NewWatcher(paths []string, cb func()) error {
 
 	defer watcher.Close()
 
+	if len(exts) == 0 {
+		exts = watchExts
+	}
+
 	done := make(chan bool)
 	go func() {
 		for {
 			select {
 			case e := <-watcher.Events:
 
-				if !shouldWatchFileWithExtension(e.Name) {
+				if !shouldWatchFileWithExtension(e.Name, exts) {
 					continue
 				}
 
@@ -76,7 +80,7 @@ func NewWatcher(paths []string, cb func()) error {
 				return nil
 			}
 
-			if !shouldWatchFileWithExtension(path) {
+			if !shouldWatchFileWithExtension(path, exts) {
 				return nil
 			}
 
@@ -182,8 +186,8 @@ func Start(appname string) {
 
 // shouldWatchFileWithExtension returns true if the name of the file
 // hash a suffix that should be watched.
-func shouldWatchFileWithExtension(name string) bool {
-	for _, s := range watchExts {
+func shouldWatchFileWithExtension(name string, exts []string) bool {
+	for _, s := range exts {
 		if strings.HasSuffix(name, s) {
 			return true
 		}

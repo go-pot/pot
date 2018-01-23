@@ -2,6 +2,7 @@ package main
 
 import (
 	"os"
+	"strings"
 
 	"gopkg.in/pot.v1/cli"
 	"gopkg.in/pot.v1/cmd/pot/generate"
@@ -59,8 +60,15 @@ func Commands() []*cli.Command {
 					Usage: "go generate ./...",
 					Value: false,
 				},
+				&cli.StringFlag{
+					Name:        "ext",
+					Usage:       "gg ext",
+					Value:       ".go",
+					DefaultText: ".go[,.ext]+",
+				},
 			},
 			Action: func(c *cli.Context) error {
+
 				b := c.Bool("gg")
 				ff := func() {
 					run.GoBuild(func() {
@@ -70,7 +78,8 @@ func Commands() []*cli.Command {
 					})
 				}
 				ff()
-				return run.NewWatcher([]string{"./"}, ff)
+				ss := strings.Split(c.String("ext"), ",")
+				return run.NewWatcher([]string{"./"}, ss, ff)
 			},
 		},
 		{
