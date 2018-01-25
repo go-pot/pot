@@ -8,6 +8,8 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+
+	"github.com/gorilla/mux"
 )
 
 func NewRequest(w http.ResponseWriter, r *http.Request) *Request {
@@ -80,6 +82,16 @@ func (c *Request) QueryForm() url.Values {
 // RequestBodyForm 获取body内容 url编码
 func (c *Request) BodyForm() url.Values {
 	return c.Request.PostForm
+}
+
+// VarsValue 获取Url {} 内的变量
+func (c *Request) VarsValue(key string) string {
+	return c.Vars()[key]
+}
+
+// Vars 获取Url {} 内的变量
+func (c *Request) Vars() map[string]string {
+	return mux.Vars(&c.Request)
 }
 
 // RequestBody 获取body内容
