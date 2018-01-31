@@ -46,16 +46,17 @@ func GenerateRouter(pkg, routers, controllers, out string) error {
 		return err
 	}
 
+	out = path.Join(out)
 	// 写文件
 	d, _ := ioutil.ReadFile(out)
 	if string(d) == string(src) {
-		fmt.Println("Unchanged routers")
+		fmt.Println("[pot] Unchanged " + out)
 	} else {
 		err = ioutil.WriteFile(out, src, 0666)
 		if err != nil {
 			return err
 		}
-		fmt.Println("Generate routers")
+		fmt.Println("[pot] Generate " + out)
 	}
 	return nil
 }

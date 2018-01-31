@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"path"
 	"path/filepath"
 
 	"github.com/wzshiming/go-swagger/swagger"
@@ -28,18 +29,21 @@ func WriteFile(rootapi interface{}, basepath string) error {
 		if err != nil {
 			return err
 		}
-		jf := filepath.Join(basepath, "swagger.json")
+		jf := basepath
+		if len(ext) == 0 {
+			jf = path.Join(".", basepath, "swagger.json")
+		}
 		dt = append(dt, '\n')
 
 		d, _ := ioutil.ReadFile(jf)
 		if string(d) == string(dt) {
-			fmt.Println("Unchanged docs swagger.json")
+			fmt.Println("[pot] Unchanged " + jf)
 		} else {
 			err = ioutil.WriteFile(jf, dt, 0666)
 			if err != nil {
 				return err
 			}
-			fmt.Println("Generate docs swagger.json")
+			fmt.Println("[pot] Generate " + jf)
 		}
 	}
 
@@ -48,17 +52,20 @@ func WriteFile(rootapi interface{}, basepath string) error {
 		if err != nil {
 			return err
 		}
-		yf := filepath.Join(basepath, "swagger.yml")
+		yf := basepath
+		if len(ext) == 0 {
+			yf = path.Join(".", basepath, "swagger.yml")
+		}
 
 		d, _ := ioutil.ReadFile(yf)
 		if string(d) == string(dt) {
-			fmt.Println("Unchanged docs swagger.yml")
+			fmt.Println("[pot] Unchanged " + yf)
 		} else {
 			err = ioutil.WriteFile(yf, dt, 0666)
 			if err != nil {
 				return err
 			}
-			fmt.Println("Generate docs swagger.yml")
+			fmt.Println("[pot] Generate " + yf)
 		}
 	}
 	return nil
