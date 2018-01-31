@@ -43,7 +43,7 @@ func WriteFile(rootapi interface{}, basepath string) error {
 		}
 	}
 
-	if ext == "" || ext == ".json" {
+	if ext == "" || ext == ".yml" {
 		dt, err := yaml.Marshal(rootapi)
 		if err != nil {
 			return err
@@ -60,7 +60,6 @@ func WriteFile(rootapi interface{}, basepath string) error {
 			}
 			fmt.Println("Generate docs swagger.yml")
 		}
-
 	}
 	return nil
 }
