@@ -1,7 +1,8 @@
-package generate
+package router
 
 import (
 	"bytes"
+	"fmt"
 	"go/format"
 	"io/ioutil"
 	"path"
@@ -10,7 +11,6 @@ import (
 
 	"github.com/wzshiming/go-swagger/swagger"
 	"github.com/wzshiming/go-swagger/swaggergen"
-	"gopkg.in/pot.v1"
 )
 
 func GenerateRouter(pkg, routers, controllers, out string) error {
@@ -29,6 +29,7 @@ func GenerateRouter(pkg, routers, controllers, out string) error {
 		return err
 	}
 
+	// 解析模板
 	buf := bytes.NewBuffer(nil)
 	err = temp.ExecuteTemplate(buf, "temp", map[string]interface{}{
 		"Swagger":  swagger,
@@ -39,17 +40,23 @@ func GenerateRouter(pkg, routers, controllers, out string) error {
 		return err
 	}
 
+	// 格式化源码
 	src, err := format.Source(buf.Bytes())
 	if err != nil {
 		return err
 	}
 
-	err = ioutil.WriteFile(out, src, 0666)
-	if err != nil {
-		return err
+	// 写文件
+	d, _ := ioutil.ReadFile(out)
+	if string(d) == string(src) {
+		fmt.Println("Unchanged routers")
+	} else {
+		err = ioutil.WriteFile(out, src, 0666)
+		if err != nil {
+			return err
+		}
+		fmt.Println("Generate routers")
 	}
-
-	pot.Println("Generate routers")
 	return nil
 }
 

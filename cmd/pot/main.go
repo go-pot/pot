@@ -5,7 +5,8 @@ import (
 	"strings"
 
 	"gopkg.in/pot.v1/cli"
-	"gopkg.in/pot.v1/cmd/pot/generate"
+	"gopkg.in/pot.v1/cmd/pot/generate/docs"
+	"gopkg.in/pot.v1/cmd/pot/generate/router"
 	"gopkg.in/pot.v1/cmd/pot/logo"
 	"gopkg.in/pot.v1/cmd/pot/run"
 )
@@ -119,8 +120,7 @@ func SubcommandsGenerate() []*cli.Command {
 				},
 			},
 			Action: func(c *cli.Context) error {
-				generate.GenerateDocs(c.String("routers"), c.String("controllers"), c.String("swagger"))
-				return nil
+				return docs.GenerateDocs(c.String("routers"), c.String("controllers"), c.String("swagger"))
 			},
 		},
 		{
@@ -150,8 +150,7 @@ func SubcommandsGenerate() []*cli.Command {
 				},
 			},
 			Action: func(c *cli.Context) error {
-				generate.GenerateRouter(c.String("package"), c.String("routers"), c.String("controllers"), c.String("out"))
-				return nil
+				return router.GenerateRouter(c.String("package"), c.String("routers"), c.String("controllers"), c.String("out"))
 			},
 		},
 	}
