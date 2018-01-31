@@ -29,9 +29,11 @@ func WriteFile(rootapi interface{}, basepath string) error {
 		if err != nil {
 			return err
 		}
-		jf := basepath
+		jf := ""
 		if len(ext) == 0 {
-			jf = path.Join(".", basepath, "swagger.json")
+			jf = path.Join(basepath, "swagger.json")
+		} else {
+			jf = path.Join(basepath)
 		}
 		dt = append(dt, '\n')
 
@@ -52,9 +54,11 @@ func WriteFile(rootapi interface{}, basepath string) error {
 		if err != nil {
 			return err
 		}
-		yf := basepath
+		yf := ""
 		if len(ext) == 0 {
-			yf = path.Join(".", basepath, "swagger.yml")
+			yf = path.Join(basepath, "swagger.yml")
+		} else {
+			yf = path.Join(basepath)
 		}
 
 		d, _ := ioutil.ReadFile(yf)
