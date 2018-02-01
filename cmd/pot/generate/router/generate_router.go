@@ -72,72 +72,91 @@ import (
 	"gopkg.in/pot.v1/router"
 )
 
-func {{.Function}}(p *pot.Pot) *router.Router {
-	r := router.NewRouter()
+func {{.Function}}(p *pot.Pot, rs ...*router.Router) (r *router.Router) {
+	
+	if len(rs) != 0 {
+		r = rs[0]
+	}
+	
+	if r == nil {
+		r = router.NewRouter()
+	}
 
 	paths := r.PathPrefix("{{.Swagger.BasePath}}").Subrouter()
 
 	// init controllers
-	{
-		{{range $k, $v := .Swagger.Paths}}
-		{{with .Get}}
-		paths.Methods(http.MethodGet).Path("{{.OperationID}}").HandlerFunc(
-			func(w http.ResponseWriter, r *http.Request) {
-				t := controllers.{{.Extensions.Controllers}}{}
-				t.Init(p, w, r)
-				t.{{.Extensions.Methods}}()
-			})
-		{{end}}
-		{{with .Post}}
-		paths.Methods(http.MethodPost).Path("{{.OperationID}}").HandlerFunc(
-			func(w http.ResponseWriter, r *http.Request) {
-				t := controllers.{{.Extensions.Controllers}}{}
-				t.Init(p, w, r)
-				t.{{.Extensions.Methods}}()
-			})
-		{{end}}
-		{{with .Put}}
-		paths.Methods(http.MethodPut).Path("{{.OperationID}}").HandlerFunc(
-			func(w http.ResponseWriter, r *http.Request) {
-				t := controllers.{{.Extensions.Controllers}}{}
-				t.Init(p, w, r)
-				t.{{.Extensions.Methods}}()
-			})
-		{{end}}
-		{{with .Delete}}
-		paths.Methods(http.MethodDelete).Path("{{.OperationID}}").HandlerFunc(
-			func(w http.ResponseWriter, r *http.Request) {
-				t := controllers.{{.Extensions.Controllers}}{}
-				t.Init(p, w, r)
-				t.{{.Extensions.Methods}}()
-			})
-		{{end}}
-		{{with .Options}}
-		paths.Methods(http.MethodOptions).Path("{{.OperationID}}").HandlerFunc(
-			func(w http.ResponseWriter, r *http.Request) {
-				t := controllers.{{.Extensions.Controllers}}{}
-				t.Init(p, w, r)
-				t.{{.Extensions.Methods}}()
-			})
-		{{end}}
-		{{with .Head}}
-		paths.Methods(http.MethodHead).Path("{{.OperationID}}").HandlerFunc(
-			func(w http.ResponseWriter, r *http.Request) {
-				t := controllers.{{.Extensions.Controllers}}{}
-				t.Init(p, w, r)
-				t.{{.Extensions.Methods}}()
-			})
-		{{end}}
-		{{with .Patch}}
-		paths.Methods(http.MethodPatch).Path("{{.OperationID}}").HandlerFunc(
-			func(w http.ResponseWriter, r *http.Request) {
-				t := controllers.{{.Extensions.Controllers}}{}
-				t.Init(p, w, r)
-				t.{{.Extensions.Methods}}()
-			})
-		{{end}}
-		{{end}}
-	}
+	{{range $k, $v := .Swagger.Paths}}
+	{{with .Get}}
+	paths.
+		Methods(http.MethodGet).
+		Path("{{.OperationID}}").
+		HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			t := controllers.{{.Extensions.Controllers}}{}
+			t.Init(p, w, r)
+			t.{{.Extensions.Methods}}()
+		})
+	{{end}}
+	{{with .Post}}
+	paths.
+		Methods(http.MethodPost).
+		Path("{{.OperationID}}").
+		HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			t := controllers.{{.Extensions.Controllers}}{}
+			t.Init(p, w, r)
+			t.{{.Extensions.Methods}}()
+		})
+	{{end}}
+	{{with .Put}}
+	paths.
+		Methods(http.MethodPut).
+		Path("{{.OperationID}}").
+		HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			t := controllers.{{.Extensions.Controllers}}{}
+			t.Init(p, w, r)
+			t.{{.Extensions.Methods}}()
+		})
+	{{end}}
+	{{with .Delete}}
+	paths.
+		Methods(http.MethodDelete).
+		Path("{{.OperationID}}").
+		HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			t := controllers.{{.Extensions.Controllers}}{}
+			t.Init(p, w, r)
+			t.{{.Extensions.Methods}}()
+		})
+	{{end}}
+	{{with .Options}}
+	paths.
+		Methods(http.MethodOptions).
+		Path("{{.OperationID}}").
+		HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			t := controllers.{{.Extensions.Controllers}}{}
+			t.Init(p, w, r)
+			t.{{.Extensions.Methods}}()
+		})
+	{{end}}
+	{{with .Head}}
+	paths.
+		Methods(http.MethodHead).
+		Path("{{.OperationID}}").
+		HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			t := controllers.{{.Extensions.Controllers}}{}
+			t.Init(p, w, r)
+			t.{{.Extensions.Methods}}()
+		})
+	{{end}}
+	{{with .Patch}}
+	paths.
+		Methods(http.MethodPatch).
+		Path("{{.OperationID}}").
+		HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			t := controllers.{{.Extensions.Controllers}}{}
+			t.Init(p, w, r)
+			t.{{.Extensions.Methods}}()
+		})
+	{{end}}
+	{{end}}
 	return r
 }
 {{end}}
