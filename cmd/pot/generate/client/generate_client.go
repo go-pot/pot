@@ -10,7 +10,6 @@ import (
 
 	"github.com/wzshiming/go-swagger/swagger"
 	"github.com/wzshiming/go-swagger/swaggergen"
-	ffmt "gopkg.in/ffmt.v1"
 )
 
 func GenerateClient(pkg, routers, controllers, out string) (err error) {
@@ -30,7 +29,6 @@ func GenerateClient(pkg, routers, controllers, out string) (err error) {
 
 	_, err = temp.Parse(mkClient)
 	if err != nil {
-		ffmt.Mark(err)
 		return err
 	}
 
@@ -41,7 +39,6 @@ func GenerateClient(pkg, routers, controllers, out string) (err error) {
 		"Package": pkg,
 	})
 	if err != nil {
-		ffmt.Mark(err)
 		return err
 	}
 
@@ -49,7 +46,6 @@ func GenerateClient(pkg, routers, controllers, out string) (err error) {
 	// 格式化源码
 	src, err = format.Source(src)
 	if err != nil {
-		ffmt.Mark(err)
 		return err
 	}
 
@@ -61,7 +57,6 @@ func GenerateClient(pkg, routers, controllers, out string) (err error) {
 	} else {
 		err = ioutil.WriteFile(out, src, 0666)
 		if err != nil {
-			ffmt.Mark(err)
 			return err
 		}
 		fmt.Println("[pot] Generate " + out)
@@ -97,9 +92,12 @@ func {{.Func}}(
 		err error, 
 	) {
 	resp, err := Cli.R().
-		{{range .ParametersHeader}}SetHeader("{{.Name}}",{{.Name}}).{{end}}
-		{{range .ParametersBody}}SetBody({{.Name}}).{{end}}
-		{{range .ParametersQuery}}SetQueryParam("{{.Name}}",{{.Name}}).{{end}}
+		{{range .ParametersHeader}}SetHeader("{{.Name}}",{{.Name}}).
+		{{end}}
+		{{range .ParametersBody}}SetBody({{.Name}}).
+		{{end}}
+		{{range .ParametersQuery}}SetQueryParam("{{.Name}}",{{.Name}}).
+		{{end}}
 		{{if .ParametersFormData}}SetFormData(map[string]string{ 
 			{{range .ParametersFormData}}"{{.Name}}": {{.Name}},{{end}} 
 		}).{{end}}
@@ -111,10 +109,14 @@ func {{.Func}}(
 		return 
 	}
 
+	body := resp.Body()
+	ct := resp.Header().Get("Content-Type")
 	switch resp.StatusCode() {
+	default:
+		_, _ : ct, body
 	{{range .Responses}}
 	case {{.Code}}:
-		resty.Unmarshal(resp.Header().Get("Content-Type"), resp.Body(), &_{{.Code}})
+		resty.Unmarshal(ct, body, &_{{.Code}})
 	{{end}}
 	}
 

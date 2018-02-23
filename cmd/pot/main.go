@@ -154,7 +154,6 @@ func SubcommandsGenerate() []*cli.Command {
 				return router.GenerateRouter(c.String("package"), c.String("routers"), c.String("controllers"), c.String("out"))
 			},
 		},
-
 		{
 			Name:    "client",
 			Aliases: []string{"cli", "c"},
