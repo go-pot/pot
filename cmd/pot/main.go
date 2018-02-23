@@ -5,6 +5,7 @@ import (
 	"strings"
 
 	"gopkg.in/pot.v1/cli"
+	"gopkg.in/pot.v1/cmd/pot/generate/client"
 	"gopkg.in/pot.v1/cmd/pot/generate/docs"
 	"gopkg.in/pot.v1/cmd/pot/generate/router"
 	"gopkg.in/pot.v1/cmd/pot/logo"
@@ -151,6 +152,37 @@ func SubcommandsGenerate() []*cli.Command {
 			},
 			Action: func(c *cli.Context) error {
 				return router.GenerateRouter(c.String("package"), c.String("routers"), c.String("controllers"), c.String("out"))
+			},
+		},
+
+		{
+			Name:    "client",
+			Aliases: []string{"cli", "c"},
+			Usage:   "Generate client",
+			Flags: []cli.Flag{
+				&cli.StringFlag{
+					Name:    "controllers",
+					Aliases: []string{"c"},
+					Usage:   "Controllers dir",
+				},
+				&cli.StringFlag{
+					Name:    "routers",
+					Aliases: []string{"r"},
+					Usage:   "Routers dir",
+				},
+				&cli.StringFlag{
+					Name:    "package",
+					Aliases: []string{"p"},
+					Usage:   "Controllers dir",
+				},
+				&cli.StringFlag{
+					Name:    "out",
+					Aliases: []string{"o"},
+					Usage:   "Routers file generate",
+				},
+			},
+			Action: func(c *cli.Context) error {
+				return client.GenerateClient(c.String("package"), c.String("routers"), c.String("controllers"), c.String("out"))
 			},
 		},
 	}
