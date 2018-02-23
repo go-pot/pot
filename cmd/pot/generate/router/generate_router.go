@@ -89,7 +89,7 @@ func {{.Function}}(p *pot.Pot, rs ...*router.Router) (r *router.Router) {
 	{{with .Get}}
 	paths.
 		Methods(http.MethodGet).
-		Path("{{.OperationID}}").
+		Path("{{$k}}").
 		HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			t := controllers.{{.Extensions.Controllers}}{}
 			t.Init(p, w, r)
@@ -99,7 +99,7 @@ func {{.Function}}(p *pot.Pot, rs ...*router.Router) (r *router.Router) {
 	{{with .Post}}
 	paths.
 		Methods(http.MethodPost).
-		Path("{{.OperationID}}").
+		Path("{{$k}}").
 		HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			t := controllers.{{.Extensions.Controllers}}{}
 			t.Init(p, w, r)
@@ -109,7 +109,7 @@ func {{.Function}}(p *pot.Pot, rs ...*router.Router) (r *router.Router) {
 	{{with .Put}}
 	paths.
 		Methods(http.MethodPut).
-		Path("{{.OperationID}}").
+		Path("{{$k}}").
 		HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			t := controllers.{{.Extensions.Controllers}}{}
 			t.Init(p, w, r)
@@ -119,7 +119,7 @@ func {{.Function}}(p *pot.Pot, rs ...*router.Router) (r *router.Router) {
 	{{with .Delete}}
 	paths.
 		Methods(http.MethodDelete).
-		Path("{{.OperationID}}").
+		Path("{{$k}}").
 		HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			t := controllers.{{.Extensions.Controllers}}{}
 			t.Init(p, w, r)
@@ -129,7 +129,7 @@ func {{.Function}}(p *pot.Pot, rs ...*router.Router) (r *router.Router) {
 	{{with .Options}}
 	paths.
 		Methods(http.MethodOptions).
-		Path("{{.OperationID}}").
+		Path("{{$k}}").
 		HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			t := controllers.{{.Extensions.Controllers}}{}
 			t.Init(p, w, r)
@@ -139,7 +139,7 @@ func {{.Function}}(p *pot.Pot, rs ...*router.Router) (r *router.Router) {
 	{{with .Head}}
 	paths.
 		Methods(http.MethodHead).
-		Path("{{.OperationID}}").
+		Path("{{$k}}").
 		HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			t := controllers.{{.Extensions.Controllers}}{}
 			t.Init(p, w, r)
@@ -149,7 +149,7 @@ func {{.Function}}(p *pot.Pot, rs ...*router.Router) (r *router.Router) {
 	{{with .Patch}}
 	paths.
 		Methods(http.MethodPatch).
-		Path("{{.OperationID}}").
+		Path("{{$k}}").
 		HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			t := controllers.{{.Extensions.Controllers}}{}
 			t.Init(p, w, r)
