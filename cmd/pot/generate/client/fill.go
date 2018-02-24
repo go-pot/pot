@@ -149,6 +149,7 @@ func (f *FilledPath) Parse(swa *swagger.Operation) {
 		if v.Schema != nil {
 			ff := &FilledResponses{
 				Code:        k,
+				Unmarshal:   true,
 				Description: v.Description,
 			}
 			if v.Schema.Type == "array" {
@@ -161,6 +162,7 @@ func (f *FilledPath) Parse(swa *swagger.Operation) {
 			f.Responses = append(f.Responses, &FilledResponses{
 				Code:        k,
 				Type:        "[]byte",
+				Unmarshal:   false,
 				Description: v.Description,
 			})
 		}
@@ -176,6 +178,7 @@ type FilledParameters struct {
 type FilledResponses struct {
 	Code        string
 	Type        string
+	Unmarshal   bool
 	Description string
 }
 

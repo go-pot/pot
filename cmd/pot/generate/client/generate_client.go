@@ -117,7 +117,11 @@ func {{.Func}}(
 		// TODO
 	{{range .Responses}}
 	case {{.Code}}:
+		{{if .Unmarshal}}
 		resty.Unmarshal(resp.Header().Get("Content-Type"), resp.Body(), &_{{.Code}})
+		{{else}}
+		_{{.Code}} = resp.Body()
+		{{end}}
 	{{end}}
 	}
 
