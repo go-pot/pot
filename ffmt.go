@@ -11,85 +11,156 @@ import (
 var (
 	// function
 
-	/*Format 格式化字符串
+	/*
 	 */
-	Format = origin.Format
-
 	NewOptional = origin.NewOptional
 
-	/*打印从当前行开始的栈
+	/*The go stlye friendly display types and data to writer
+
 	 */
-	MarkStackFull = origin.MarkStackFull
+	Fp = origin.Fp
 
-	/*标记当前行栈
+	/*The go stlye friendly display types and data
+
 	 */
-	MarkStack = origin.MarkStack
+	P = origin.P
 
-	/*标记当前行
+	/*The go stlye friendly display types and data to string
+
 	 */
-	Mark = origin.Mark
+	Sp = origin.Sp
 
-	FMakeStack = origin.FMakeStack
+	/*The go stlye friendly to writer
 
-	FMakeStackFunc = origin.FMakeStackFunc
+	 */
+	Fputs = origin.Fputs
 
-	/*制表
+	/*The go stlye friendly display
+
+	 */
+	Puts = origin.Puts
+
+	/*The go stlye friendly to string
+
+	 */
+	Sputs = origin.Sputs
+
+	/*The go stlye friendly to writer
+
+	 */
+	Fprint = origin.Fprint
+
+	/*The go stlye friendly display
+
+	 */
+	Print = origin.Print
+
+	/*The go stlye friendly to string
+
+	 */
+	Sprint = origin.Sprint
+
+	/*The json stlye friendly display to writer
+
+	 */
+	Fpjson = origin.Fpjson
+
+	/*The json stlye friendly display
+
+	 */
+	Pjson = origin.Pjson
+
+	/*The json stlye friendly display to string
+
+	 */
+	Spjson = origin.Spjson
+
+	/*Data to table data
+
 	 */
 	ToTable = origin.ToTable
 
-	/*制表格式化
+	/*Format table data
+
 	 */
 	FmtTable = origin.FmtTable
 
-	Biglen = origin.Biglen
+	/*Format
 
-	Fp = origin.Fp
+	 */
+	Format = origin.Format
 
-	P = origin.P
+	/*Output stack full
 
-	Sp = origin.Sp
+	 */
+	MarkStackFull = origin.MarkStackFull
 
-	Fputs = origin.Fputs
+	/*Output prefix stack line pos
 
-	Puts = origin.Puts
+	 */
+	MarkStack = origin.MarkStack
 
-	Sputs = origin.Sputs
+	/*Output prefix current line position
 
-	Fprint = origin.Fprint
+	 */
+	Mark = origin.Mark
 
-	Print = origin.Print
+	/*
+	 */
+	FMakeStack = origin.FMakeStack
 
-	Sprint = origin.Sprint
-
-	Fpjson = origin.Fpjson
-
-	Pjson = origin.Pjson
-
-	Spjson = origin.Spjson
+	/*
+	 */
+	FMakeStackFunc = origin.FMakeStackFunc
 )
 
 var (
 	// value
 
+	/*
+	can use .(fmt.Stringer)
+	*/
 	CanDefaultString = origin.CanDefaultString
 
+	/*
+	Filter duplicates
+	*/
 	CanFilterDuplicate = origin.CanFilterDuplicate
 
+	/*
+	Fold line
+	*/
 	CanRowSpan = origin.CanRowSpan
 
+	/*
+	Display type and data
+	*/
 	StlyeP = origin.StlyeP
 
+	/*
+	Display data
+	*/
 	StlyePuts = origin.StlyePuts
 
+	/*
+	Display data; string without quotes
+	*/
 	StlyePrint = origin.StlyePrint
 
+	/*
+	The json stlye display; Do not show private
+	*/
 	StlyePjson = origin.StlyePjson
 
+	/*
+	 */
+	Space = origin.Space
+
+	/*
+	 */
 	Printf = origin.Printf
 
+	/*
+	 */
 	Println = origin.Println
-
-	BigWord = origin.BigWord
-
-	Space = origin.Space
 )
