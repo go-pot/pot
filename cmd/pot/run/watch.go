@@ -44,6 +44,9 @@ func NewWatcher(paths []string, exts []string, cb func()) error {
 		for {
 			select {
 			case e := <-watcher.Events:
+				if e.Op == fsnotify.Chmod {
+					continue
+				}
 
 				if !shouldWatchFileWithExtension(e.Name, exts) {
 					continue
