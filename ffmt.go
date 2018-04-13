@@ -11,156 +11,111 @@ import (
 var (
 	// function
 
-	/*
-	 */
-	NewOptional = origin.NewOptional
-
-	/*The go stlye friendly display types and data to writer
-
-	 */
-	Fp = origin.Fp
-
-	/*The go stlye friendly display types and data
-
-	 */
-	P = origin.P
-
-	/*The go stlye friendly display types and data to string
-
-	 */
-	Sp = origin.Sp
-
-	/*The go stlye friendly to writer
-
-	 */
-	Fputs = origin.Fputs
-
-	/*The go stlye friendly display
-
-	 */
-	Puts = origin.Puts
-
-	/*The go stlye friendly to string
-
-	 */
-	Sputs = origin.Sputs
-
-	/*The go stlye friendly to writer
-
-	 */
-	Fprint = origin.Fprint
-
-	/*The go stlye friendly display
-
-	 */
-	Print = origin.Print
-
-	/*The go stlye friendly to string
-
-	 */
-	Sprint = origin.Sprint
-
-	/*The json stlye friendly display to writer
-
-	 */
-	Fpjson = origin.Fpjson
-
-	/*The json stlye friendly display
-
-	 */
-	Pjson = origin.Pjson
-
-	/*The json stlye friendly display to string
-
-	 */
-	Spjson = origin.Spjson
-
-	/*Data to table data
-
-	 */
-	ToTable = origin.ToTable
-
-	/*Format table data
-
-	 */
-	FmtTable = origin.FmtTable
-
-	/*Format
-
+	/*Format  Format("hello {name}", "ffmt") to "hello ffmt"
 	 */
 	Format = origin.Format
 
-	/*Output stack full
-
+	/*MarkStackFull Output stack full
 	 */
 	MarkStackFull = origin.MarkStackFull
 
-	/*Output prefix stack line pos
-
+	/*MarkStack Output prefix stack line pos
 	 */
 	MarkStack = origin.MarkStack
 
-	/*Output prefix current line position
-
+	/*Mark Output prefix current line position
 	 */
 	Mark = origin.Mark
 
-	/*
+	/*FMakeStack stack information
 	 */
 	FMakeStack = origin.FMakeStack
 
-	/*
+	/*FMakeStackFunc stack information
 	 */
 	FMakeStackFunc = origin.FMakeStackFunc
+
+	/*ToTable Data to table data
+	 */
+	ToTable = origin.ToTable
+
+	/*FmtTable Format table data
+	 */
+	FmtTable = origin.FmtTable
+
+	/*Fp The go style friendly display types and data to writer
+	 */
+	Fp = origin.Fp
+
+	/*P The go style friendly display types and data
+	 */
+	P = origin.P
+
+	/*Sp The go style friendly display types and data to string
+	 */
+	Sp = origin.Sp
+
+	/*Fputs The go style friendly to writer
+	 */
+	Fputs = origin.Fputs
+
+	/*Puts The go style friendly display
+	 */
+	Puts = origin.Puts
+
+	/*Sputs The go style friendly to string
+	 */
+	Sputs = origin.Sputs
+
+	/*Fprint The go style friendly to writer
+	 */
+	Fprint = origin.Fprint
+
+	/*Print The go style friendly display
+	 */
+	Print = origin.Print
+
+	/*Sprint The go style friendly to string
+	 */
+	Sprint = origin.Sprint
+
+	/*Fpjson The json style friendly display to writer
+	 */
+	Fpjson = origin.Fpjson
+
+	/*Pjson The json style friendly display
+	 */
+	Pjson = origin.Pjson
+
+	/*Spjson The json style friendly display to string
+	 */
+	Spjson = origin.Spjson
+
+	/*NewOptional ffmt optional
+	 */
+	NewOptional = origin.NewOptional
 )
 
 var (
 	// value
 
-	/*
-	can use .(fmt.Stringer)
-	*/
-	CanDefaultString = origin.CanDefaultString
-
-	/*
-	Filter duplicates
-	*/
-	CanFilterDuplicate = origin.CanFilterDuplicate
-
-	/*
-	Fold line
-	*/
-	CanRowSpan = origin.CanRowSpan
-
-	/*
-	Display type and data
-	*/
-	StlyeP = origin.StlyeP
-
-	/*
-	Display data
-	*/
-	StlyePuts = origin.StlyePuts
-
-	/*
-	Display data; string without quotes
-	*/
-	StlyePrint = origin.StlyePrint
-
-	/*
-	The json stlye display; Do not show private
-	*/
-	StlyePjson = origin.StlyePjson
-
-	/*
-	 */
 	Space = origin.Space
 
-	/*
-	 */
 	Printf = origin.Printf
 
-	/*
-	 */
 	Println = origin.Println
+
+	CanDefaultString = origin.CanDefaultString
+
+	CanFilterDuplicate = origin.CanFilterDuplicate
+
+	CanRowSpan = origin.CanRowSpan
+
+	StyleP = origin.StyleP
+
+	StylePuts = origin.StylePuts
+
+	StylePrint = origin.StylePrint
+
+	StylePjson = origin.StylePjson
 )
