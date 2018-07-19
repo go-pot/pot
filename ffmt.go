@@ -39,7 +39,10 @@ var (
 	// Sp The go style friendly display types and data to string
 	Sp = origin.Sp
 
-	// SmarkStack returns Output prefix stack line pos
+	// SmarkStackFunc stack information
+	SmarkStackFunc = origin.SmarkStackFunc
+
+	// SmarkStack stack information
 	SmarkStack = origin.SmarkStack
 
 	// Smark returns Output prefix current line position
@@ -96,12 +99,6 @@ var (
 	// FmtTable Format table data
 	FmtTable = origin.FmtTable
 
-	// FMakeStackFunc stack information
-	FMakeStackFunc = origin.FMakeStackFunc
-
-	// FMakeStack stack information
-	FMakeStack = origin.FMakeStack
-
 	// D for debug
 	D = origin.D
 
@@ -110,4 +107,7 @@ var (
 	CanFilterDuplicate = origin.CanFilterDuplicate
 
 	CanDefaultString = origin.CanDefaultString
+
+	// Align returns align structured strings
+	Align = origin.Align
 )
